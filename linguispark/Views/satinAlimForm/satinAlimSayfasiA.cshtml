@@ -1,0 +1,57 @@
+﻿@model linguispark.Models.entity.tblSatis
+@{
+    ViewBag.Title = "satinAlimSayfasiA";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>satinAlimSayfasiA</h2>
+
+@using (Html.BeginForm("satinAlim", "satinAlimForm", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Müşteri Ad Soyad</label>
+                @Html.TextBoxFor(x => x.musteriAdSoyad, new { @class = "form-control" })
+            </div>
+            <br />
+            <div class="form-group">
+                <label>Çevirmen: </label>
+                @*@Html.DropDownListFor(x => x.tblCevirmen.id, (List<SelectListItem>)ViewBag.cevirmenAdi, new { @class = "form-control" })*@
+                @Html.DropDownListFor(x => x.cevirmen, (List<SelectListItem>)ViewBag.cevirmenAdi, "Seçiniz", new { @class = "form-control" })
+            </div>
+            <br />
+            <div class="form-group">
+                <label>Fiyat</label>
+                @Html.TextBoxFor(x => x.fiyat, new { @class = "form-control" })
+            </div>
+            <br />
+            <div class="form-group">
+                <label>Tarih</label>
+                @Html.TextBoxFor(x => x.tarih, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Mail</label>
+                @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+            </div>
+            <br />
+            <div class="form-group">
+                <label>Telefon</label>
+                @Html.TextBoxFor(x => x.telefon, new { @class = "form-control" })
+            </div>
+            <br />
+            <div class="form-group">
+                <label>Adres</label>
+                @Html.TextBoxFor(x => x.adres, new { @class = "form-control" })
+            </div>
+            <br />
+        </div>
+    </div>
+    <br />
+    @Html.HiddenFor(x => x.id)
+    <button class="btn btn-primary">Satın Al</button>
+
+}

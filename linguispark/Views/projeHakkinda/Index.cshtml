@@ -1,0 +1,26 @@
+﻿@using linguispark.Models.entity
+@model List<tblProjeHakkinda>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Proje Hakkında</h2>
+
+<section>
+    <section>
+        @foreach (var i in Model)
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" src="~/adminTema/4580151-html-programming-code-blue-simplicity.jpg" />
+                </div>
+                <div class="col-md-8">
+                    <p style="white-space: pre-wrap; font-size: 1.5rem;" class="text-wrap">@i.projeHakkinda</p>
+                </div>
+            </div>
+            <br />
+        }
+    </section>
+
+</section>

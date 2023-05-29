@@ -1,0 +1,18 @@
+﻿@model linguispark.Models.entity.tblCevirmen
+@{
+    ViewBag.Title = "cevirmenEKle";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>cevirmenEKle</h2>
+
+@using (Html.BeginForm("cevirmenEkle", "cevirmen", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>CevirmenAdi</label>
+        @Html.TextBoxFor(i => i.cevirmenAdi, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(i => i.id)
+    <button class="btn btn-primary">Ekle</button>
+}
+

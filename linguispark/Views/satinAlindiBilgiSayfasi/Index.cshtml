@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/satinAlindi.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <div class="purchase-confirmation" id="satinAlindi">
+            <i class="ri-mail-unread-line" style="font-size:30px;"></i>
+            <h2>Satın Alma İşlemi Tamamlandı E-Posta Adresinize Mail Gönderildi Lütfen Kontrol Ediniz :)</h2>
+            <a href="/anaSayfa/Index" class="btn btn-success">Ana Sayfaya Dön</a>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var element = document.getElementById('satinAlindi'); // Animasyonu uygulamak istediğiniz HTML öğesinin kimliğini buraya yerleştirin
+        element.classList.add('animate-onload');
+    });
+</script>

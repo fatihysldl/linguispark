@@ -1,0 +1,31 @@
+﻿.purchase-confirmation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    opacity: 0; /* İlk başta görünmez olacak */
+}
+
+.animate__backInRight {
+    animation-name: backInRight;
+    animation-duration: 1s;
+}
+
+@keyframes backInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-onload {
+    animation: backInRight 1s;
+    opacity: 1;
+}

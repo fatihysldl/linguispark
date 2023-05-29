@@ -1,0 +1,22 @@
+﻿@model linguispark.Models.entity.tblProjeHakkinda
+@{
+    ViewBag.Title = "projeHakkindaGuncellemeSayfasi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Proje Hakkında Güncelleme Sayfası</h2>
+
+@using (Html.BeginForm("projeHakkindaGuncelle", "projeHakkinda", FormMethod.Post))
+{
+    <br />
+    <div class="form-group">
+        <label>Proje Hakkında</label>
+        <br />
+        @Html.TextAreaFor(i => i.projeHakkinda, new { @class = "form-control", rows = "6" })
+    </div>
+    <br />
+    @Html.HiddenFor(i => i.id)
+    <br />
+    <button class="btn btn-primary">Güncelle</button>
+}
+

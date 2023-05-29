@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="linguisparkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adminKullaniciAd" Type="varchar" MaxLength="50" />
+          <Property Name="adminSifre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblCevirmen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cevirmenAdi" Type="varchar" MaxLength="50" />
+          <Property Name="durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblHakkimda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hakkimda" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblHeader">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="headerBaslik" Type="varchar(max)" />
+          <Property Name="headerAciklama" Type="varchar(max)" />
+          <Property Name="headerFotograf" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblKart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kartBaslikCevirmenAdi" Type="int" />
+          <Property Name="kartAciklama" Type="varchar" MaxLength="50" />
+          <Property Name="kartFotograf" Type="varchar(max)" />
+          <Property Name="kartDurum" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblMusteri">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="musteriAdSoyad" Type="int" />
+          <Property Name="musteriAdres" Type="varchar(max)" />
+          <Property Name="musteriDurum" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblProjeHakkinda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fotograf" Type="varchar" MaxLength="100" />
+          <Property Name="projeHakkinda" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tblSatis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cevirmen" Type="int" />
+          <Property Name="musteriAdSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="fiyat" Type="int" />
+          <Property Name="Mail" Type="varchar" MaxLength="150" />
+          <Property Name="telefon" Type="varchar" MaxLength="50" />
+          <Property Name="adres" Type="varchar(max)" />
+          <Property Name="tarih" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="tblWeather">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="location" Type="varchar(max)" />
+          <Property Name="temperature" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="description" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_tblKart_tblCevirmen">
+          <End Role="tblCevirmen" Type="Self.tblCevirmen" Multiplicity="0..1" />
+          <End Role="tblKart" Type="Self.tblKart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCevirmen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblKart">
+              <PropertyRef Name="kartBaslikCevirmenAdi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMusteri_tblSatis">
+          <End Role="tblSatis" Type="Self.tblSatis" Multiplicity="0..1" />
+          <End Role="tblMusteri" Type="Self.tblMusteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSatis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblMusteri">
+              <PropertyRef Name="musteriAdSoyad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblSatis_tblCevirmen">
+          <End Role="tblCevirmen" Type="Self.tblCevirmen" Multiplicity="0..1" />
+          <End Role="tblSatis" Type="Self.tblSatis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCevirmen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblSatis">
+              <PropertyRef Name="cevirmen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="linguisparkModelStoreContainer">
+          <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCevirmen" EntityType="Self.tblCevirmen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHakkimda" EntityType="Self.tblHakkimda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKart" EntityType="Self.tblKart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMusteri" EntityType="Self.tblMusteri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjeHakkinda" EntityType="Self.tblProjeHakkinda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSatis" EntityType="Self.tblSatis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWeather" EntityType="Self.tblWeather" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblKart_tblCevirmen" Association="Self.FK_tblKart_tblCevirmen">
+            <End Role="tblCevirmen" EntitySet="tblCevirmen" />
+            <End Role="tblKart" EntitySet="tblKart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMusteri_tblSatis" Association="Self.FK_tblMusteri_tblSatis">
+            <End Role="tblSatis" EntitySet="tblSatis" />
+            <End Role="tblMusteri" EntitySet="tblMusteri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblSatis_tblCevirmen" Association="Self.FK_tblSatis_tblCevirmen">
+            <End Role="tblCevirmen" EntitySet="tblCevirmen" />
+            <End Role="tblSatis" EntitySet="tblSatis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="linguisparkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adminKullaniciAd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adminSifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblCevirmen">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cevirmenAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblSatis" Relationship="Self.FK_tblSatis_tblCevirmen" FromRole="tblCevirmen" ToRole="tblSatis" />
+          <Property Name="durum" Type="Boolean" />
+          <NavigationProperty Name="tblKart" Relationship="linguisparkModel.FK_tblKart_tblCevirmen" FromRole="tblCevirmen" ToRole="tblKart" />
+        </EntityType>
+        <EntityType Name="tblHeader">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="headerBaslik" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="headerAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="headerFotograf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblMusteri">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="musteriAdSoyad" Type="Int32" />
+          <Property Name="musteriAdres" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="musteriDurum" Type="Boolean" />
+          <NavigationProperty Name="tblSatis" Relationship="Self.FK_tblMusteri_tblSatis" FromRole="tblMusteri" ToRole="tblSatis" />
+        </EntityType>
+        <EntityType Name="tblSatis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cevirmen" Type="Int32" />
+          <Property Name="musteriAdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fiyat" Type="Int32" />
+          <Property Name="Mail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tarih" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblCevirmen" Relationship="Self.FK_tblSatis_tblCevirmen" FromRole="tblSatis" ToRole="tblCevirmen" />
+          <NavigationProperty Name="tblMusteri" Relationship="Self.FK_tblMusteri_tblSatis" FromRole="tblSatis" ToRole="tblMusteri" />
+        </EntityType>
+        <EntityType Name="tblWeather">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="temperature" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_tblSatis_tblCevirmen">
+          <End Role="tblCevirmen" Type="Self.tblCevirmen" Multiplicity="0..1" />
+          <End Role="tblSatis" Type="Self.tblSatis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCevirmen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblSatis">
+              <PropertyRef Name="cevirmen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMusteri_tblSatis">
+          <End Role="tblSatis" Type="Self.tblSatis" Multiplicity="0..1" />
+          <End Role="tblMusteri" Type="Self.tblMusteri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSatis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblMusteri">
+              <PropertyRef Name="musteriAdSoyad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="linguisparkEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" />
+          <EntitySet Name="tblCevirmen" EntityType="Self.tblCevirmen" />
+          <EntitySet Name="tblHeader" EntityType="Self.tblHeader" />
+          <EntitySet Name="tblMusteri" EntityType="Self.tblMusteri" />
+          <EntitySet Name="tblSatis" EntityType="Self.tblSatis" />
+          <EntitySet Name="tblWeather" EntityType="Self.tblWeather" />
+          <AssociationSet Name="FK_tblSatis_tblCevirmen" Association="Self.FK_tblSatis_tblCevirmen">
+            <End Role="tblCevirmen" EntitySet="tblCevirmen" />
+            <End Role="tblSatis" EntitySet="tblSatis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMusteri_tblSatis" Association="Self.FK_tblMusteri_tblSatis">
+            <End Role="tblSatis" EntitySet="tblSatis" />
+            <End Role="tblMusteri" EntitySet="tblMusteri" />
+          </AssociationSet>
+          <EntitySet Name="tblProjeHakkinda" EntityType="linguisparkModel.tblProjeHakkinda" />
+          <EntitySet Name="tblKart" EntityType="linguisparkModel.tblKart" />
+          <AssociationSet Name="FK_tblKart_tblCevirmen" Association="linguisparkModel.FK_tblKart_tblCevirmen">
+            <End Role="tblCevirmen" EntitySet="tblCevirmen" />
+            <End Role="tblKart" EntitySet="tblKart" />
+          </AssociationSet>
+          <EntitySet Name="tblHakkimda" EntityType="linguisparkModel.tblHakkimda" />
+        </EntityContainer>
+        <EntityType Name="tblProjeHakkinda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fotograf" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="projeHakkinda" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblKart">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kartBaslikCevirmenAdi" Type="Int32" />
+          <Property Name="kartAciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="kartFotograf" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="kartDurum" Type="Boolean" />
+          <NavigationProperty Name="tblCevirmen" Relationship="linguisparkModel.FK_tblKart_tblCevirmen" FromRole="tblKart" ToRole="tblCevirmen" />
+        </EntityType>
+        <Association Name="FK_tblKart_tblCevirmen">
+          <End Type="linguisparkModel.tblCevirmen" Role="tblCevirmen" Multiplicity="0..1" />
+          <End Type="linguisparkModel.tblKart" Role="tblKart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCevirmen">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tblKart">
+              <PropertyRef Name="kartBaslikCevirmenAdi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tblHakkimda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hakkimda" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="linguisparkModelStoreContainer" CdmEntityContainer="linguisparkEntities1">
+          <EntitySetMapping Name="tblAdmin">
+            <EntityTypeMapping TypeName="linguisparkModel.tblAdmin">
+              <MappingFragment StoreEntitySet="tblAdmin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="adminKullaniciAd" ColumnName="adminKullaniciAd" />
+                <ScalarProperty Name="adminSifre" ColumnName="adminSifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCevirmen">
+            <EntityTypeMapping TypeName="linguisparkModel.tblCevirmen">
+              <MappingFragment StoreEntitySet="tblCevirmen">
+                <ScalarProperty Name="durum" ColumnName="durum" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cevirmenAdi" ColumnName="cevirmenAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHeader">
+            <EntityTypeMapping TypeName="linguisparkModel.tblHeader">
+              <MappingFragment StoreEntitySet="tblHeader">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="headerBaslik" ColumnName="headerBaslik" />
+                <ScalarProperty Name="headerAciklama" ColumnName="headerAciklama" />
+                <ScalarProperty Name="headerFotograf" ColumnName="headerFotograf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMusteri">
+            <EntityTypeMapping TypeName="linguisparkModel.tblMusteri">
+              <MappingFragment StoreEntitySet="tblMusteri">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="musteriAdSoyad" ColumnName="musteriAdSoyad" />
+                <ScalarProperty Name="musteriAdres" ColumnName="musteriAdres" />
+                <ScalarProperty Name="musteriDurum" ColumnName="musteriDurum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSatis">
+            <EntityTypeMapping TypeName="linguisparkModel.tblSatis">
+              <MappingFragment StoreEntitySet="tblSatis">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cevirmen" ColumnName="cevirmen" />
+                <ScalarProperty Name="musteriAdSoyad" ColumnName="musteriAdSoyad" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWeather">
+            <EntityTypeMapping TypeName="linguisparkModel.tblWeather">
+              <MappingFragment StoreEntitySet="tblWeather">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="temperature" ColumnName="temperature" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjeHakkinda">
+            <EntityTypeMapping TypeName="linguisparkModel.tblProjeHakkinda">
+              <MappingFragment StoreEntitySet="tblProjeHakkinda">
+                <ScalarProperty Name="projeHakkinda" ColumnName="projeHakkinda" />
+                <ScalarProperty Name="fotograf" ColumnName="fotograf" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKart">
+            <EntityTypeMapping TypeName="linguisparkModel.tblKart">
+              <MappingFragment StoreEntitySet="tblKart">
+                <ScalarProperty Name="kartDurum" ColumnName="kartDurum" />
+                <ScalarProperty Name="kartFotograf" ColumnName="kartFotograf" />
+                <ScalarProperty Name="kartAciklama" ColumnName="kartAciklama" />
+                <ScalarProperty Name="kartBaslikCevirmenAdi" ColumnName="kartBaslikCevirmenAdi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHakkimda">
+            <EntityTypeMapping TypeName="linguisparkModel.tblHakkimda">
+              <MappingFragment StoreEntitySet="tblHakkimda">
+                <ScalarProperty Name="hakkimda" ColumnName="hakkimda" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

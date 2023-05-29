@@ -1,0 +1,25 @@
+﻿@model linguispark.Models.entity.tblKart
+@{
+    ViewBag.Title = "kartGuncellemeSayfasi";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Kart Güncelleme Sayfası</h2>
+
+@using (Html.BeginForm("kartGuncelle", "CevirmenKart", FormMethod.Post))
+{
+<div class="form-group">
+    <label>Kart Başlık (Cevirmen Adı)</label>
+    @Html.DropDownListFor(x => x.tblCevirmen.id, (List<SelectListItem>)ViewBag.kartlar, new { @class = "form-control" })
+</div>
+    <div class="form-group">
+        <label>Kart Açıklama (Ücret)</label>
+        @Html.TextBoxFor(i => i.kartAciklama, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Kart Fotoğraf Link</label>
+        @Html.TextBoxFor(i => i.kartFotograf, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(i => i.id)
+    <button class="btn btn-primary">Güncelle</button>
+}

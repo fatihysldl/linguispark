@@ -1,0 +1,29 @@
+﻿@using linguispark.Models.entity
+@model List<tblProjeHakkinda>
+@{
+    ViewBag.Title = "Index1";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Proje Hakkında Listesi</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Proje Hakkında</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+
+    <tbody>
+        @foreach(var i in Model)
+            {
+        <tr>
+            <td>@i.id</td>
+            <td style="max-width: 0; word-wrap: break-word;">@i.projeHakkinda</td>
+            <td><a <a href="/projeHakkinda/projeHakkindaSil/@i.id" class="btn btn-warning">Sil</a></td>
+            <td><a href="/projeHakkinda/projeHakkindaGuncellemeSayfasi/@i.id" class="btn btn-success">Güncelle</a></td>
+        </tr>
+            }
+    </tbody>
+</table>
+
